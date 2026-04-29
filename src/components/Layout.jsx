@@ -14,7 +14,6 @@ export default function Layout({ children, devName, team, level }) {
         onClose={() => setOpen(false)}
       />
 
-      {/* Content — full width minus sidebar on desktop */}
       <div className="main-content" style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
         {children({ openSidebar: () => setOpen(true) })}
       </div>
@@ -29,6 +28,9 @@ export default function Layout({ children, devName, team, level }) {
             margin-left: 220px;
           }
           .mobile-overlay {
+            display: none !important;
+          }
+          .hamburger-btn {
             display: none !important;
           }
         }

@@ -48,27 +48,54 @@ export default function ICPage() {
             height: '54px', padding: '0 24px',
             display: 'flex', alignItems: 'center', gap: '12px', flexShrink: 0,
           }}>
-            <button onClick={openSidebar} aria-label="Menu" style={{
-              background: 'none', border: '1px solid var(--color-border)', borderRadius: '6px',
-              cursor: 'pointer', padding: '5px 9px', fontSize: '15px',
-              color: 'var(--color-text)', lineHeight: 1,
-            }}>☰</button>
+
+            {/* ── hamburger — hidden on desktop via Layout.jsx media query ── */}
+            <button
+              className="hamburger-btn"
+              onClick={openSidebar}
+              aria-label="Menu"
+              style={{
+                background: 'none',
+                border: '1px solid var(--color-border)',
+                borderRadius: '6px',
+                cursor: 'pointer',
+                padding: '5px 9px',
+                fontSize: '15px',
+                color: 'var(--color-text)',
+                lineHeight: 1,
+              }}
+            >☰</button>
 
             <span style={{ fontSize: '14px', fontWeight: 600, color: 'var(--color-text)' }}>IC Profile</span>
 
             <div style={{ marginLeft: 'auto', display: 'flex', gap: '8px', alignItems: 'center' }}>
               <div style={{ position: 'relative' }}>
-                <select value={selectedDev} onChange={e => setSelectedDev(e.target.value)} style={{
-                  background: 'var(--color-surface)', border: '1px solid var(--color-border)',
-                  borderRadius: '7px', padding: '6px 28px 6px 10px',
-                  fontSize: '13px', fontFamily: 'var(--font-body)',
-                  color: 'var(--color-text)', cursor: 'pointer', outline: 'none',
-                }}>
-                  {developers.map(d => <option key={d.developer_id} value={d.developer_id}>{d.developer_name}</option>)}
+                <select
+                  value={selectedDev}
+                  onChange={e => setSelectedDev(e.target.value)}
+                  style={{
+                    background: 'var(--color-surface)', border: '1px solid var(--color-border)',
+                    borderRadius: '7px', padding: '6px 28px 6px 10px',
+                    fontSize: '13px', fontFamily: 'var(--font-body)',
+                    color: 'var(--color-text)', cursor: 'pointer', outline: 'none',
+                  }}
+                >
+                  {developers.map(d => (
+                    <option key={d.developer_id} value={d.developer_id}>{d.developer_name}</option>
+                  ))}
                 </select>
-                <span style={{ position: 'absolute', right: '9px', top: '50%', transform: 'translateY(-50%)', fontSize: '10px', color: 'var(--color-text-3)', pointerEvents: 'none' }}>▾</span>
+                <span style={{
+                  position: 'absolute', right: '9px', top: '50%',
+                  transform: 'translateY(-50%)', fontSize: '10px',
+                  color: 'var(--color-text-3)', pointerEvents: 'none',
+                }}>▾</span>
               </div>
-              <div style={{ display: 'flex', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: '7px', padding: '3px', gap: '2px' }}>
+
+              <div style={{
+                display: 'flex', background: 'var(--color-surface)',
+                border: '1px solid var(--color-border)', borderRadius: '7px',
+                padding: '3px', gap: '2px',
+              }}>
                 {MONTHS.map(m => (
                   <button key={m} onClick={() => setSelectedMonth(m)} style={{
                     padding: '4px 12px', borderRadius: '5px', border: 'none', cursor: 'pointer',
@@ -82,7 +109,7 @@ export default function ICPage() {
             </div>
           </header>
 
-          {/* ── Page body — full width, padded ── */}
+          {/* ── Page body ── */}
           <div style={{ flex: 1, padding: '24px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
 
             {/* Identity row */}
@@ -105,34 +132,34 @@ export default function ICPage() {
               }}>{current.pattern_hint}</span>
             </div>
 
-            {/* ── Metrics row — always full width ── */}
-            <div className="anim anim-2" style={{
+            {/* Metrics row */}
+            <div className="anim anim-2 metrics-5col" style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(5, 1fr)',
               gap: '12px',
             }}>
-              <MetricCard label="Lead Time"     value={current.avg_lead_time_days.toFixed(1)} unit="d"       status={interp.leadStatus}  prevValue={prev?.avg_lead_time_days}           lowerIsBetter detail="PR open → prod deploy" />
-              <MetricCard label="Cycle Time"    value={current.avg_cycle_time_days.toFixed(1)} unit="d"      status={interp.cycleStatus} prevValue={prev?.avg_cycle_time_days}          lowerIsBetter detail="In progress → done" />
-              <MetricCard label="PR Throughput" value={current.merged_prs}                     unit="merged" status="neutral"            prevValue={prev?.merged_prs}                  lowerIsBetter={false} detail="Pull requests merged" />
-              <MetricCard label="Deploy Freq."  value={current.prod_deployments}               unit="/"      status="neutral"            prevValue={prev?.prod_deployments}            lowerIsBetter={false} detail="Production deployments" />
-              <MetricCard label="Bug Rate"      value={`${(current.bug_rate_pct*100).toFixed(0)}%`}          status={interp.bugStatus}   prevValue={prev ? prev.bug_rate_pct*100 : undefined} lowerIsBetter detail={`${current.escaped_bugs} escaped bug${current.escaped_bugs!==1?'s':''}`} />
+              <MetricCard label="Lead Time"     value={current.avg_lead_time_days.toFixed(1)} unit="d"       status={interp.leadStatus}  prevValue={prev?.avg_lead_time_days}                              lowerIsBetter detail="PR open → prod deploy" />
+              <MetricCard label="Cycle Time"    value={current.avg_cycle_time_days.toFixed(1)} unit="d"      status={interp.cycleStatus} prevValue={prev?.avg_cycle_time_days}                             lowerIsBetter detail="In progress → done" />
+              <MetricCard label="PR Throughput" value={current.merged_prs}                     unit="merged" status="neutral"            prevValue={prev?.merged_prs}                                      lowerIsBetter={false} detail="Pull requests merged" />
+              <MetricCard label="Deploy Freq."  value={current.prod_deployments}               unit="/"      status="neutral"            prevValue={prev?.prod_deployments}                                lowerIsBetter={false} detail="Production deployments" />
+              <MetricCard label="Bug Rate"      value={`${(current.bug_rate_pct * 100).toFixed(0)}%`}        status={interp.bugStatus}   prevValue={prev ? prev.bug_rate_pct * 100 : undefined}            lowerIsBetter detail={`${current.escaped_bugs} escaped bug${current.escaped_bugs !== 1 ? 's' : ''}`} />
             </div>
 
-            {/* ── Main content — 3-col layout ── */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 300px', gap: '16px', alignItems: 'start' }}>
+            {/* Main 3-col */}
+            <div className="main-3col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 300px', gap: '16px', alignItems: 'start' }}>
 
               {/* Col 1 — Interpretation */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
                 <InterpretPanel story={interp.story} signals={interp.signals} actions={interp.actions} />
               </div>
 
-              {/* Col 2 — PR Table + Trend */}
+              {/* Col 2 — Trend + PR Table */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
                 <div className="anim anim-3"><TrendChart data={trendData} /></div>
                 <div className="anim anim-6"><PRTable prs={prs} /></div>
               </div>
 
-              {/* Col 3 — Sidebar panels */}
+              {/* Col 3 — Side panels */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
 
                 {/* Review health */}
@@ -186,9 +213,9 @@ export default function ICPage() {
                     PR activity
                   </div>
                   {prs.length > 0 ? [
-                    { label: 'Avg lines / PR',     val: Math.round(prs.reduce((s,p)=>s+p.lines_changed,0)/prs.length) },
-                    { label: 'Avg review rounds',  val: (prs.reduce((s,p)=>s+p.review_rounds,0)/prs.length).toFixed(1) },
-                    { label: 'Avg merge time',     val: `${(prs.reduce((s,p)=>s+p.merge_time_hours,0)/prs.length).toFixed(1)}h` },
+                    { label: 'Avg lines / PR',    val: Math.round(prs.reduce((s, p) => s + p.lines_changed, 0) / prs.length) },
+                    { label: 'Avg review rounds', val: (prs.reduce((s, p) => s + p.review_rounds, 0) / prs.length).toFixed(1) },
+                    { label: 'Avg merge time',    val: `${(prs.reduce((s, p) => s + p.merge_time_hours, 0) / prs.length).toFixed(1)}h` },
                   ].map(({ label, val }, i, arr) => (
                     <div key={label} style={{
                       display: 'flex', justifyContent: 'space-between', alignItems: 'center',
@@ -198,12 +225,13 @@ export default function ICPage() {
                       <span style={{ fontSize: '13px', color: 'var(--color-text-2)' }}>{label}</span>
                       <span style={{ fontSize: '16px', fontWeight: 700, fontFamily: 'var(--font-mono)', color: 'var(--color-text)' }}>{val}</span>
                     </div>
-                  )) : <p style={{ fontSize: '13px', color: 'var(--color-text-3)', margin: 0 }}>No PRs this month.</p>}
+                  )) : (
+                    <p style={{ fontSize: '13px', color: 'var(--color-text-3)', margin: 0 }}>No PRs this month.</p>
+                  )}
                 </div>
 
               </div>
             </div>
-
           </div>
 
           {/* Responsive styles */}

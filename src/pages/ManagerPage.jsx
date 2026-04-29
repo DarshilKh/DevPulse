@@ -58,11 +58,26 @@ export default function ManagerPage() {
             height: '54px', padding: '0 24px',
             display: 'flex', alignItems: 'center', gap: '12px', flexShrink: 0,
           }}>
-            <button onClick={openSidebar} aria-label="Menu" style={{
-              background: 'none', border: '1px solid var(--color-border)', borderRadius: '6px',
-              cursor: 'pointer', padding: '5px 9px', fontSize: '15px', color: 'var(--color-text)', lineHeight: 1,
-            }}>☰</button>
+
+            {/* ── hamburger — hidden on desktop via Layout.jsx media query ── */}
+            <button
+              className="hamburger-btn"
+              onClick={openSidebar}
+              aria-label="Menu"
+              style={{
+                background: 'none',
+                border: '1px solid var(--color-border)',
+                borderRadius: '6px',
+                cursor: 'pointer',
+                padding: '5px 9px',
+                fontSize: '15px',
+                color: 'var(--color-text)',
+                lineHeight: 1,
+              }}
+            >☰</button>
+
             <span style={{ fontSize: '14px', fontWeight: 600, color: 'var(--color-text)' }}>Manager View</span>
+
             <div style={{ marginLeft: 'auto', display: 'flex', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: '7px', padding: '3px', gap: '2px' }}>
               {MONTHS.map(m => (
                 <button key={m} onClick={() => setSelectedMonth(m)} style={{
@@ -86,8 +101,8 @@ export default function ManagerPage() {
               </h2>
             </div>
 
-            {/* Summary cards — full width, equal columns */}
-            <div className="anim anim-2" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '14px' }}>
+            {/* Summary cards */}
+            <div className="anim anim-2 mgr-summary" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '14px' }}>
               {summaries.map(mgr => {
                 const s = SIGNAL[mgr.signal] || SIGNAL['Watch bottlenecks']
                 return (
@@ -125,8 +140,8 @@ export default function ManagerPage() {
               })}
             </div>
 
-            {/* Chart + tables side by side */}
-            <div style={{ display: 'grid', gridTemplateColumns: '380px 1fr', gap: '16px', alignItems: 'start' }}>
+            {/* Chart + tables */}
+            <div className="mgr-content" style={{ display: 'grid', gridTemplateColumns: '380px 1fr', gap: '16px', alignItems: 'start' }}>
 
               {/* Bar chart */}
               <div className="anim anim-3" style={{ background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: '10px', padding: '18px 20px' }}>
@@ -139,9 +154,9 @@ export default function ManagerPage() {
                     <XAxis dataKey="team" tick={{ fill: '#9b9590', fontSize: 12 }} axisLine={false} tickLine={false} />
                     <YAxis tick={{ fill: '#9b9590', fontSize: 11 }} axisLine={false} tickLine={false} />
                     <Tooltip content={<Tip />} cursor={{ fill: 'rgba(0,0,0,0.03)' }} />
-                    <Bar dataKey="Lead Time" fill="#2563eb" radius={[3,3,0,0]} />
+                    <Bar dataKey="Lead Time"  fill="#2563eb" radius={[3,3,0,0]} />
                     <Bar dataKey="Cycle Time" fill="#7c3aed" radius={[3,3,0,0]} />
-                    <Bar dataKey="Bug %" fill="#dc2626" radius={[3,3,0,0]} />
+                    <Bar dataKey="Bug %"      fill="#dc2626" radius={[3,3,0,0]} />
                   </BarChart>
                 </ResponsiveContainer>
                 <div style={{ display: 'flex', gap: '14px', marginTop: '10px', flexWrap: 'wrap' }}>
@@ -153,7 +168,7 @@ export default function ManagerPage() {
                 </div>
               </div>
 
-              {/* All team tables stacked on right */}
+              {/* Team tables */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 {teamBreakdown.map((team, ti) => {
                   const s = SIGNAL[team.signal] || SIGNAL['Watch bottlenecks']
