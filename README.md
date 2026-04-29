@@ -6,8 +6,6 @@
 
 ### Metrics → Insights → Action
 
-<img src="https://readme-typing-svg.demolab.com?font=Inter&weight=500&size=18&pause=1000&color=58A6FF&center=true&vCenter=true&width=700&lines=Beyond+Metrics+—+Interpretation+Engine;Developer+Productivity+Insights;Actionable+Engineering+Feedback;Built+with+Modern+React+Stack" />
-
 <br/>
 
 <a href="https://dev-pulse-kohl.vercel.app">
