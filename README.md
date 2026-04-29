@@ -1,3 +1,23 @@
+<div align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0D1117,50:1a1a2e,100:16213e&height=140&section=header&animation=fadeIn" />
+
+# 🚀 DevPulse — Developer Productivity MVP
+
+### Metrics → Insights → Action
+
+<img src="https://readme-typing-svg.demolab.com?font=Inter&weight=500&size=18&pause=1000&color=58A6FF&center=true&vCenter=true&width=700&lines=Beyond+Metrics+—+Interpretation+Engine;Developer+Productivity+Insights;Actionable+Engineering+Feedback;Built+with+Modern+React+Stack" />
+
+<br/>
+
+<a href="https://dev-pulse-kohl.vercel.app">
+  <img src="https://img.shields.io/badge/🌐 Live Demo-000?style=for-the-badge&logo=vercel&logoColor=white"/>
+</a>
+
+</div>
+
+---
+
 # DevPulse — Developer Productivity MVP
 
 ## What the assignment asked for
@@ -31,7 +51,7 @@ All data comes from `src/data/rawData.js` — the workbook's 5 tables encoded as
 
 ---
 
-## Tech Stack
+## ⚡ Tech Stack
 
 | Layer | Choice | Why |
 |---|---|---|
@@ -43,11 +63,9 @@ All data comes from `src/data/rawData.js` — the workbook's 5 tables encoded as
 | Fonts | **Plus Jakarta Sans** + **IBM Plex Mono** | Professional, readable, not generic |
 | Data layer | Plain JS (no ORM, no fetch) | Clean mock data; easily swappable for a real API |
 
-No deprecated libraries. No class components. No legacy lifecycle methods.
-
 ---
 
-## Project Structure
+## 🗂️ Project Structure
 
 ```
 src/
@@ -72,7 +90,7 @@ src/
 
 ---
 
-## Running locally
+## 🚀 Running locally
 
 ```bash
 npm install
@@ -83,7 +101,7 @@ Open `http://localhost:5173`
 
 ---
 
-## The 5 metrics (as defined by the assignment)
+## 📊 The 5 metrics (as defined by the assignment)
 
 | Metric | Definition used |
 |---|---|
@@ -92,3 +110,11 @@ Open `http://localhost:5173`
 | Bug Rate | Escaped prod bugs ÷ issues completed in the month |
 | Deployment Frequency | Count of successful prod deployments in the month |
 | PR Throughput | Count of merged pull requests in the month |
+
+---
+
+<div align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:16213e,50:1a1a2e,100:0D1117&height=100&section=footer" />
+
+</div>
